@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: int_orders_monthly
+    description: ""
+    config:
+      materialized: table
+      schema: intermediate
+    columns:
+      - name: order_purchase_day
+        description: ""
+      - name: order_status
+        description: ""
+      - name: order_count
+        description: ""

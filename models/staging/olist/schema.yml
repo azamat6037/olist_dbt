@@ -5,14 +5,156 @@ sources:
     database: peak-seat-479300-h4
     schema: olist
     tables:
+      - name: first_intermediate_model
+        columns:
+          - name: customer_id
+            data_type: string
+          - name: customer_unique_id
+            data_type: string
+          - name: customer_zip_code_prefix
+            data_type: int64
+          - name: customer_city
+            data_type: string
+          - name: customer_state
+            data_type: string
+          - name: geolocation_zip_code_prefix
+            data_type: int64
+          - name: geolocation_lat
+            data_type: float64
+          - name: geolocation_lng
+            data_type: float64
+          - name: geolocation_city
+            data_type: string
+          - name: geolocation_state
+            data_type: string
+
       - name: olist_customers_dataset
+        columns:
+          - name: customer_id
+            data_type: string
+          - name: customer_unique_id
+            data_type: string
+          - name: customer_zip_code_prefix
+            data_type: int64
+          - name: customer_city
+            data_type: string
+          - name: customer_state
+            data_type: string
+
       - name: olist_geolocation_dataset
+        columns:
+          - name: geolocation_zip_code_prefix
+            data_type: int64
+          - name: geolocation_lat
+            data_type: float64
+          - name: geolocation_lng
+            data_type: float64
+          - name: geolocation_city
+            data_type: string
+          - name: geolocation_state
+            data_type: string
+
       - name: olist_order_items_dataset
+        columns:
+          - name: order_id
+            data_type: string
+          - name: order_item_id
+            data_type: int64
+          - name: product_id
+            data_type: string
+          - name: seller_id
+            data_type: string
+          - name: shipping_limit_date
+            data_type: timestamp
+          - name: price
+            data_type: float64
+          - name: freight_value
+            data_type: float64
+
       - name: olist_order_payments_dataset
+        columns:
+          - name: order_id
+            data_type: string
+          - name: payment_sequential
+            data_type: int64
+          - name: payment_type
+            data_type: string
+          - name: payment_installments
+            data_type: int64
+          - name: payment_value
+            data_type: float64
+
       - name: olist_order_reviews_dataset
+        columns:
+          - name: review_id
+            data_type: string
+          - name: order_id
+            data_type: string
+          - name: review_score
+            data_type: int64
+          - name: review_comment_title
+            data_type: string
+          - name: review_comment_message
+            data_type: string
+          - name: review_creation_date
+            data_type: timestamp
+          - name: review_answer_timestamp
+            data_type: timestamp
+
       - name: olist_orders_dataset
+        columns:
+          - name: order_id
+            data_type: string
+          - name: customer_id
+            data_type: string
+          - name: order_status
+            data_type: string
+          - name: order_purchase_timestamp
+            data_type: timestamp
+          - name: order_approved_at
+            data_type: timestamp
+          - name: order_delivered_carrier_date
+            data_type: timestamp
+          - name: order_delivered_customer_date
+            data_type: timestamp
+          - name: order_estimated_delivery_date
+            data_type: timestamp
+
       - name: olist_products_dataset
+        columns:
+          - name: product_id
+            data_type: string
+          - name: product_category_name
+            data_type: string
+          - name: product_name_lenght
+            data_type: int64
+          - name: product_description_lenght
+            data_type: int64
+          - name: product_photos_qty
+            data_type: int64
+          - name: product_weight_g
+            data_type: int64
+          - name: product_length_cm
+            data_type: int64
+          - name: product_height_cm
+            data_type: int64
+          - name: product_width_cm
+            data_type: int64
+
       - name: olist_sellers_dataset
+        columns:
+          - name: seller_id
+            data_type: string
+          - name: seller_zip_code_prefix
+            data_type: int64
+          - name: seller_city
+            data_type: string
+          - name: seller_state
+            data_type: string
+
       - name: product_category_name_translation
-      
-      
+        columns:
+          - name: string_field_0
+            data_type: string
+          - name: string_field_1
+            data_type: string
