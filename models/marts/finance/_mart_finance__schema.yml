@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: agg_finance__gmv
+    description: "Monthly Gross Merchandise Value analysis"
+    columns:
+      - name: order_month
+        tests:
+          - unique
+          - not_null
+      - name: gmv
+        tests:
+          - positive_value
+      - name: order_count
+        tests:
+          - positive_value
+
+  - name: agg_finance__payments
+    description: "Payment type distribution and installment analysis"
+    columns:
+      - name: payment_type
+        tests:
+          - unique
+          - not_null
+      - name: total_value
+        tests:
+          - positive_value
+      - name: pct_of_gmv
+        description: "Percentage of total GMV"

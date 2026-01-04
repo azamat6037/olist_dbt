@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: "Date dimension covering 2016-2018 for Olist order analysis"
+    columns:
+      - name: date_key
+        description: "Surrogate key for date dimension"
+        tests:
+          - unique
+          - not_null
+      - name: date_day
+        description: "Calendar date"
+        tests:
+          - unique
+          - not_null
+      - name: is_weekend
+        description: "Boolean flag for weekend days"
+
+  - name: dim_customers
+    description: "Customer dimension at customer_unique_id grain with lifetime stats"
+    columns:
+      - name: customer_key
+        description: "Surrogate key for customer dimension"
+        tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        description: "Natural key - unique customer identifier"
+        tests:
+          - unique
+          - not_null
+      - name: customer_state
+        description: "Brazilian state abbreviation"
+      - name: total_orders
+        description: "Lifetime order count"
+      - name: total_spent
+        description: "Lifetime spend (price + freight)"
+
+  - name: dim_products
+    description: "Product dimension with category translations and description bucketing"
+    columns:
+      - name: product_key
+        description: "Surrogate key for product dimension"
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        description: "Natural key - product identifier"
+        tests:
+          - unique
+          - not_null
+      - name: category_name_en
+        description: "English product category name"
+      - name: description_length_bucket
+        description: "Bucketed description length: Short/Medium/Long/Very Long"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Short', 'Medium', 'Long', 'Very Long']
+
+  - name: dim_sellers
+    description: "Seller dimension with aggregated sales stats"
+    columns:
+      - name: seller_key
+        description: "Surrogate key for seller dimension"
+        tests:
+          - unique
+          - not_null
+      - name: seller_id
+        description: "Natural key - seller identifier"
+        tests:
+          - unique
+          - not_null
+      - name: seller_state
+        description: "Brazilian state abbreviation"
+
+  - name: dim_geography
+    description: "Geography dimension with deduplicated coordinates"
+    columns:
+      - name: geo_key
+        description: "Surrogate key for geography dimension"
+        tests:
+          - unique
+          - not_null
+      - name: zip_code_prefix
+        description: "Brazilian zip code prefix"
+      - name: state
+        description: "Brazilian state abbreviation"
+      - name: latitude
+        description: "Average latitude for the zip/city/state"
+      - name: longitude
+        description: "Average longitude for the zip/city/state"

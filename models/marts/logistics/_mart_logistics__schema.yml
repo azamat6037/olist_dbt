@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: agg_logistics__delivery
+    description: "Monthly delivery performance metrics"
+    columns:
+      - name: order_month
+        tests:
+          - unique
+          - not_null
+      - name: on_time_delivery_rate
+        description: "Percentage of orders delivered on or before estimate"
+        tests:
+          - valid_retention_rate
+
+  - name: agg_logistics__carrier_performance
+    description: "Carrier performance by seller-customer state corridors"
+    columns:
+      - name: total_orders
+        tests:
+          - positive_value
+      - name: on_time_rate
+        tests:
+          - valid_retention_rate

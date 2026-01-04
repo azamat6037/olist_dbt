@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: agg_customer_service__reviews
+    description: "Review score distribution analysis (NPS proxy)"
+    columns:
+      - name: review_score
+        tests:
+          - unique
+          - not_null
+          - valid_review_score
+      - name: pct_of_total
+        description: "Percentage of total reviews"
+
+  - name: agg_customer_service__sellers
+    description: "Seller performance and issue tracking"
+    columns:
+      - name: seller_key
+        tests:
+          - unique
+          - not_null
+      - name: avg_review_score
+        tests:
+          - valid_review_score
+      - name: low_score_rate
+        description: "Percentage of reviews with score <= 2"
+        tests:
+          - valid_retention_rate
+      - name: cancellation_rate
+        tests:
+          - valid_retention_rate
+      - name: late_delivery_rate
+        tests:
+          - valid_retention_rate

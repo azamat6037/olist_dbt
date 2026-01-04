@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: fct_order_items
+    description: "Fact table at order item grain with all dimension keys and pre-computed metrics"
+    columns:
+      - name: order_item_key
+        description: "Surrogate key for fact table (order_id + order_item_id)"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+      - name: order_item_id
+        description: "Item sequence within order"
+        tests:
+          - not_null
+      - name: customer_key
+        description: "Foreign key to dim_customers"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_key
+      - name: product_key
+        description: "Foreign key to dim_products"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_products')
+                field: product_key
+      - name: seller_key
+        description: "Foreign key to dim_sellers"
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_sellers')
+                field: seller_key
+      - name: order_status
+        description: "Order status"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['delivered', 'shipped', 'canceled', 'unavailable', 'invoiced', 'processing', 'created', 'approved']
+      - name: price
+        description: "Item price"
+      - name: freight_value
+        description: "Shipping cost for this item"
+      - name: review_score
+        description: "Customer review score (1-5)"
+
+  - name: fct_payments
+    description: "Fact table at payment grain"
+    columns:
+      - name: payment_key
+        description: "Surrogate key for fact table"
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+      - name: payment_type
+        description: "Payment method used"
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['credit_card', 'boleto', 'voucher', 'debit_card', 'not_defined']
+      - name: payment_installments
+        description: "Number of payment installments"
+      - name: payment_value
+        description: "Payment amount"

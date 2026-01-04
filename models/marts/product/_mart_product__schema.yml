@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: agg_product__categories
+    description: "Product category performance analysis"
+    columns:
+      - name: category_name_en
+        tests:
+          - unique
+          - not_null
+      - name: total_revenue
+        tests:
+          - positive_value
+      - name: avg_review_score
+        tests:
+          - valid_review_score
+
+  - name: agg_product__description_impact
+    description: "Analysis of description length impact on sales"
+    columns:
+      - name: description_length_bucket
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Short', 'Medium', 'Long', 'Very Long', 'Unknown']

@@ -1,0 +1,40 @@
+version: 2
+
+models:
+  - name: agg_marketing__clv
+    description: "Customer Lifetime Value analysis with segmentation"
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+      - name: customer_lifetime_value
+        description: "Total spend by customer"
+        tests:
+          - positive_value
+      - name: customer_segment
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['VIP', 'Repeat', 'One-time']
+
+  - name: agg_marketing__retention
+    description: "Cohort-based retention analysis"
+    columns:
+      - name: cohort_month
+        tests:
+          - unique
+          - not_null
+      - name: retention_rate
+        tests:
+          - valid_retention_rate
+
+  - name: agg_marketing__geography
+    description: "Geographic customer density analysis"
+    columns:
+      - name: customer_count
+        tests:
+          - positive_value
+      - name: total_revenue
+        tests:
+          - positive_value
